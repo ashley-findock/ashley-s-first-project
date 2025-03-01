@@ -1,18 +1,39 @@
-# Salesforce DX Project: Next Steps
+# Update Transaction Day to Current Date (FinDock for Fundraising)
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+A quick description for what this repo contains:
 
-## How Do You Plan to Deploy Your Changes?
+- Record-Triggered Flow designed to update the Transaction Day on Gift Commitment Schedules to the day of the month a Gift Commitment was created
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+-Intended for organizations using Fundraising for Nonprofit Cloud with FinDock for Fundraising installed
 
-## Configure Your Salesforce DX Project
+# Requirements
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+The prerequisites to deploy this repository are:
 
-## Read All About It
+- Fundraising enabled and configured in your Salesforce environment
+- FinDock is authenticated with a dedicated Integration User that has the proper permissions
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+# Configuration
+
+- Update the entry criteria for the Flow to include the Record ID of the User authenticating FinDock WebHub (we recommend using a dedicated Integration User)
+- Activate the Flow
+
+## Full list of components
+
+```
+flows/Gift_Commitment_Schedule_Update_TransactionDay_to_Current_Date.xml
+```
+
+## Contributing
+
+When contributing to this repository, please first discuss the change you wish to make via an issue or any other method with FinDock before making a change.
+
+## Support
+
+FinDock Labs is a non-supported group in FinDock that releases applications. Despite the name, assistance for any of these applications is not provided by FinDock Support because they are not officially supported features. For a list of these apps, visit the FinDock Labs account on Github.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](
+
+https://www.notion.so/LICENSE) file
