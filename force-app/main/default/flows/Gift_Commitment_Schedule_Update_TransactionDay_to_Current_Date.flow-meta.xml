@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <description>Updates the Transaction Day on a Gift Commitment Schedule created by the User authenticating FinDock to the day of the month that the record was created (overriding the default behavior of the first day of the following month)</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Formula to find the day of the month that the triggering record was created to use for the TransactionDay field. If the day of the month is 31, the output is &quot;LastDay&quot; as the TransactionDay field picklist does not include &quot;31&quot;</description>
+        <name>formText_TransactionDay</name>
+        <dataType>String</dataType>
+        <expression>IF(DAY(DATEVALUE({!$Record.CreatedDate})) = 31, &quot;LastDay&quot;, TEXT(DAY(DATEVALUE({!$Record.CreatedDate}))))</expression>
+    </formulas>
+    <interviewLabel>Gift Commitment Schedule - Update TransactionDay to Current Date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Gift Commitment Schedule - Update TransactionDay to Current Date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Updates the Transaction Day on the triggering record using a formula resource to identify the day of the month the record was created.</description>
+        <name>updateGiftCommitmentSchedule2</name>
+        <label>updateGiftCommitmentSchedule</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>TransactionDay</field>
+            <value>
+                <elementReference>formText_TransactionDay</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>updateGiftCommitmentSchedule2</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CreatedById</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>005a5000002NDg9AAG</stringValue>
+            </value>
+        </filters>
+        <object>GiftCommitmentSchedule</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
